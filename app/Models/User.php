@@ -12,19 +12,31 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Définir le nom de la table
+    protected $table = 'users';
+
+    // Définir la clé primaire personnalisée
+    protected $primaryKey = 'id_user';
+
+    // Désactiver l'incrémentation automatique si ce n'est pas une clé auto-incrémentée
+    public $incrementing = true;
+
+    // Définir le type de la clé primaire
+    protected $keyType = 'int';
+
     /**
-     * The attributes that are mass assignable.
+     * Les attributs pouvant être assignés en masse.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Les attributs à cacher pour la sérialisation.
      *
      * @var array<int, string>
      */
@@ -34,12 +46,12 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * Les attributs à caster.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'datetime',
         'password' => 'hashed',
     ];
 }
